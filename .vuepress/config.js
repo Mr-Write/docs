@@ -1,6 +1,20 @@
 // .vuepress/config.js
-module.exports = {
+const moment = require('moment');
 
+module.exports = {
+    plugins: [
+        [
+            '@vuepress/last-updated',
+            {
+                transformer: (timestamp) => {
+                    // 不要忘了安装 moment （npm add moment）
+                    moment.locale("zh-cn")
+                    // 当前格式：2023/07/22 凌晨 12:44
+                    return moment(timestamp).format('YYYY/MM/DD A h:mm')
+                }
+            }
+        ]
+    ],
     // 注入到页面的 <head> 标签中
     head: [
         // 指定图标
@@ -113,7 +127,7 @@ module.exports = {
         }
     },
     // 基础路径
-    // base: '/fox/',
+    base: '/docs/',
     // 显示行号
     markdown: {
         lineNumbers: true

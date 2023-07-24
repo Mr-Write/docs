@@ -2,31 +2,45 @@
 const moment = require('moment');
 
 module.exports = {
-    plugins: [
-        [
-            '@vuepress/last-updated',
-            {
-                transformer: (timestamp) => {
-                    // 不要忘了安装 moment （npm add moment）
-                    moment.locale("zh-cn")
-                    // 当前格式：2023/07/22 凌晨 12:44
-                    return moment(timestamp).format('YYYY/MM/DD A h:mm')
-                }
+    // 网站的标题，它将会被用作所有页面标题的前缀，同时，默认主题下，它将显示在导航栏（navbar）上。
+    title: '狐狸半面添的客栈',
+    // 网站的描述，它将会以 `<meta>` 标签渲染到当前页面的 HTML 中。
+    description: '一个人走走停停，一个逐浪者',
+    plugins: {
+
+        '@vuepress/last-updated': {
+            transformer: (timestamp) => {
+                // 不要忘了安装 moment （npm add moment）
+                moment.locale("zh-cn")
+                // 当前格式：2023/07/22 凌晨 12:44
+                return moment(timestamp).format('YYYY/MM/DD A h:mm')
             }
-        ]
-    ],
+        },
+        '@vssue/vuepress-plugin-vssue': {
+            // 设置 `platform` 而不是 `api`
+            platform: 'github-v4',
+
+            // 其他的 Vssue 配置
+            owner: 'Mr-Write',
+            repo: 'docs',
+            clientId: 'd5ea0f359f27260b88c1',
+            clientSecret: '36f54b709ca39c53010aa7fc467f0a3e1748fe84',
+            // autoCreateIssue 设置为 true，在对应的 Issue 不存在时，Vssue 会自动尝试为你创建 Issue。
+            autoCreateIssue: true
+        }
+    },
     // 注入到页面的 <head> 标签中
     head: [
         // 指定图标
         ['link', { rel: 'icon', href: '/favicon.ico' }],
         ['meta', { name: 'keywords', content: '是谢添啊,逐浪者,唐雨浪,博客' }],
-        ['meta', { name: 'author', content: '狐狸半面添' }]
+        ['meta', { name: 'author', content: '狐狸半面添' }],
     ],
-    // 网站的标题，它将会被用作所有页面标题的前缀，同时，默认主题下，它将显示在导航栏（navbar）上。
-    title: '狐狸半面添的客栈',
-    // 网站的描述，它将会以 `<meta>` 标签渲染到当前页面的 HTML 中。
-    description: '一个人走走停停，一个逐浪者',
     themeConfig: {
+        // 默认值是 true 。设置为 false 来禁用所有页面的 下一篇 链接
+        nextLinks: true,
+        // 默认值是 true 。设置为 false 来禁用所有页面的 上一篇 链接
+        prevLinks: true,
         // 显示所有页面的标题链接
         // displayAllHeaders: true,
         // 导航栏 logo，显示在左上角位置
@@ -127,7 +141,7 @@ module.exports = {
         }
     },
     // 基础路径
-    base: '/docs/',
+    // base: '/docs/',
     // 显示行号
     markdown: {
         lineNumbers: true

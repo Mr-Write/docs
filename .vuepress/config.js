@@ -27,7 +27,8 @@ module.exports = {
             clientSecret: '36f54b709ca39c53010aa7fc467f0a3e1748fe84',
             // autoCreateIssue 设置为 true，在对应的 Issue 不存在时，Vssue 会自动尝试为你创建 Issue。
             autoCreateIssue: true
-        }
+        },
+        '@vuepress/back-to-top': true
     },
     // 注入到页面的 <head> 标签中
     head: [
